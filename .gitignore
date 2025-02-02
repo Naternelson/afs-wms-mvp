@@ -1,0 +1,49 @@
+# General
+.DS_Store
+*.log
+*.env
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+
+# Virtual Environments
+venv/
+.env/
+.envrc
+
+# Python Dependencies
+pip-log.txt
+pip-delete-this-directory.txt
+requirements.lock
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn.lock
+package-lock.json
+
+# Docker
+*.dockerfile
+docker-compose.override.yml
+
+# Infrastructure & CI/CD
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+.envrc
+secrets/
+
+# GitHub Actions
+.github/workflows/*.bak
+.github/workflows/*.tmp
+
+# Logs & Cache
+logs/
+*.log
+cache/
+*.pid
+*.seed
