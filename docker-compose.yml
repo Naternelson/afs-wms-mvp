@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  backend:
+    build: .
+    container_name: wms-backend
+    volumes:
+      - .:/app  # Syncs local files with the container
+    ports:
+      - "8000:8000"  # Expose API (if running FastAPI/Django/Flask)
+    env_file:
+      - .env  # Optional: store environment variables here
+    command: ["bash"]  # Default command (can be overridden)
