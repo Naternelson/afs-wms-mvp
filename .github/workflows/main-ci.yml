@@ -25,6 +25,11 @@ jobs:
       run: |
         pip install -r requirements.txt
 
+    - name: Run Formatter (Black)
+      run: |
+        pip install black
+        black src/
+        git diff --exit-code || (echo "Code is not formatted properly. Run 'black src/'" && exit 1)
     - name: Run Linter
       run: |
         pip install flake8
