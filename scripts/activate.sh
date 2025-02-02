@@ -1,5 +1,8 @@
 #!/bin/bash
-# Check if venv exists before activating
+
+echo "🔄 Activating virtual environment..."
+
+# Check if venv exists
 if [ -d "venv" ]; then
     if [ -f "venv/bin/activate" ]; then
         source venv/bin/activate  # Linux/Mac
@@ -13,4 +16,6 @@ else
     echo "❌ Error: Virtual environment does not exist. Run 'scripts/setup.sh' first."
     exit 1
 fi
-echo "Python VE running"
+
+# Confirm the Python environment
+echo "🐍 Python VE running from: $(which python)"

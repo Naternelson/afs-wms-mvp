@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from src.backend.api.v1.routes.health import router as health_router
 
 app = FastAPI(title="AFS WMS API", version="1.0")
 
@@ -6,6 +7,4 @@ app = FastAPI(title="AFS WMS API", version="1.0")
 def read_root():
     return {"message": "Welcome to AFS WMS API"}
 
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
+app.include_router(health_router, prefix="/api/v1")
