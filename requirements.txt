@@ -1,2 +1,18 @@
-flake8
+# Core FastAPI dependencies
+fastapi
+uvicorn[standard]
+
+# Database dependencies
+SQLAlchemy
+psycopg2-binary  # PostgreSQL driver
+alembic  # Database migrations
+
+# Data validation
+pydantic
+
+# Async support (optional)
+asyncpg  # Async PostgreSQL driver for SQLAlchemy
+
+# Testing dependencies
 pytest
+httpx
