@@ -99,11 +99,11 @@ afs-wms-mvp/
 
 ---
 ## **📌 Roadmap & Future Enhancements**
-**✅ Phase 1:** Backend Setup (FastAPI, PostgreSQL, CI/CD) 
-**🔄 Phase 2:** Authentication (JWT, OAuth2) 
-**🔄 Phase 3:** AI-Driven Optimization & Task Assignment 
-**🔄 Phase 4:** UI Development for Monitoring & Control 
-**🔄 Phase 5:** Cloud Deployment & Scaling
+- **✅ Phase 1:** Backend Setup (FastAPI, PostgreSQL, CI/CD) 
+- **🔄 Phase 2:** Authentication (JWT, OAuth2) 
+- **🔄 Phase 3:** AI-Driven Optimization & Task Assignment 
+- **🔄 Phase 4:** UI Development for Monitoring & Control 
+- **🔄 Phase 5:** Cloud Deployment & Scaling
 ---
 ## **📄 License**
 This project is licensed under the MIT License.
