@@ -47,3 +47,4 @@ logs/
 cache/
 *.pid
 *.seed
+.env
