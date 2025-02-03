@@ -1,40 +1,42 @@
 name: WMS CI Pipeline
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
-        branches:
-            - main
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout Code
-              uses: actions/checkout@v3
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
 
-            - name: Set up Python
-              uses: actions/setup-python@v4
-              with:
-                  python-version: '3.10'
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
 
-            - name: Install Dependencies
-              run: |
-                  pip install --upgrade pip
-                  pip install -r requirements.txt
-                  pip install black flake8 pytest
+    - name: Install Dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install black ruff pytest
 
-            - name: Run Formatter (Black)
-              run: |
-                  pip install black
-                  black --check src/
-            - name: Run Linter
-              run: |
-                  pip install flake8
-                  flake8 src/ --max-line-length=88
-            - name: Run Tests
-              run: |
-                  pytest tests/
+    - name: Auto-Fix Formatting (Black)
+      run: |
+        black src/
+        git diff --quiet || (git config --global user.name 'github-actions' && git config --global user.email 'github-actions@github.com' && git commit -am "Auto-format code using Black" && git push)
+
+    - name: Auto-Fix Linting (Ruff)
+      run: |
+        ruff check src/ --fix
+        git diff --quiet || (git config --global user.name 'github-actions' && git config --global user.email 'github-actions@github.com' && git commit -am "Auto-fix linting issues using Ruff" && git push)
+
+    - name: Run Tests (Pytest)
+      run: |
+        pytest tests/
