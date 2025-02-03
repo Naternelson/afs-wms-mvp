@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from src.backend.models.inventory import Inventory
 from src.backend.schemas.inventory import InventoryCreate, InventoryUpdate
 
+
 class InventoryService:
     @staticmethod
     def get_all(db: Session):

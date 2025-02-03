@@ -17,9 +17,11 @@ if config.config_file_name is not None:
 # Set target metadata (so Alembic knows which models to use)
 target_metadata = Base.metadata
 
+
 # Create the engine directly from our DATABASE_URL
 def get_engine():
     return create_engine(DATABASE_URL, poolclass=pool.NullPool)
+
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode (no DB connection)."""
@@ -33,18 +35,17 @@ def run_migrations_offline() -> None:
     with context.begin_transaction():
         context.run_migrations()
 
+
 def run_migrations_online() -> None:
     """Run migrations in 'online' mode (connects to DB)."""
     connectable = get_engine()
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection,
-            target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
+
 
 # Determine migration mode
 if context.is_offline_mode():

@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean
 from src.backend.core.database import Base
 
+
 class Inventory(Base):
     __tablename__ = "inventory"
 
