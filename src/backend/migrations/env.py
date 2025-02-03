@@ -5,6 +5,7 @@ from alembic import context
 
 # Import the Base metadata from our FastAPI models
 from src.backend.core.database import Base, DATABASE_URL
+from src.backend.models.inventroy import Inventory
 
 # Load Alembic Config
 config = context.config
