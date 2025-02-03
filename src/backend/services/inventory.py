@@ -16,7 +16,7 @@ class InventoryService:
     @staticmethod
     def create(db: Session, item: InventoryCreate):
         """Create a new inventory item"""
-        db_item = Inventory(**item.dict())
+        db_item = Inventory(**item.model_dump())
         db.add(db_item)
         db.commit()
         db.refresh(db_item)
@@ -28,7 +28,7 @@ class InventoryService:
         db_item = db.query(Inventory).filter(Inventory.id == inventory_id).first()
         if not db_item:
             return None
-        for key, value in item.dict().items():
+        for key, value in item.model_dump().items():
             setattr(db_item, key, value)
         db.commit()
         db.refresh(db_item)

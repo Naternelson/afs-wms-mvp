@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from pydantic import ConfigDict
 
 class InventoryBase(BaseModel):
     """Shared properties for inventory"""
@@ -21,5 +22,4 @@ class InventoryRead(InventoryBase):
     """Schema for returning inventory data"""
     id: int
 
-    class Config:
-        from_attributes = True  # Ensures compatibility with SQLAlchemy ORM
+    model_config = ConfigDict(from_attributes=True)  # New method
