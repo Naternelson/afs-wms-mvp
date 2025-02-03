@@ -3,7 +3,6 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from src.backend.core.database import get_db
-from src.backend.models.inventory import Inventory
 from src.backend.schemas.inventory import (
     InventoryCreate,
     InventoryRead,
