@@ -13,17 +13,20 @@ TestSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 @pytest.fixture(scope="function")
 def db():
     """Create a new database session for a test."""
-    Base.metadata.create_all(bind=engine)  # Create tables
+    Base.metadata.create_all(bind=engine)  # Create tables before test
     db = TestSessionLocal()
     try:
         yield db
     finally:
         db.rollback()
         db.close()
-        Base.metadata.drop_all(bind=engine)  # Clean up tables after each test
+        Base.metadata.drop_all(bind=engine)  # Cleanup after test
 
 # ✅ Override FastAPI dependency to use test database
-app.dependency_overrides[get_db] = db
+@pytest.fixture(scope="function", autouse=True)
+def override_get_db(monkeypatch):
+    """Override the FastAPI dependency injection to use test database"""
+    monkeypatch.setattr("src.backend.core.database.get_db", lambda: db())
 
 @pytest.fixture(scope="module")
 def client():

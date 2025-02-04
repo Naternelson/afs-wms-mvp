@@ -1,3 +1,4 @@
+import pytest
 
 def test_create_inventory_item(client):
     """Test creating an inventory item"""
