@@ -11,6 +11,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - name: Checkout Code
@@ -25,7 +39,14 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r requirements.txt
-        pip install black ruff pytest
+        pip install black ruff pytest alembic psycopg2
+
+    - name: Set up Database URL
+      run: echo "DATABASE_URL=postgresql://test_user:test_password@localhost:5432/test_db" >> $GITHUB_ENV
+
+    - name: Run Database Migrations
+      run: |
+        alembic upgrade head
 
     - name: Auto-Fix Formatting (Black)
       run: |
